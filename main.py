@@ -4,17 +4,10 @@ from vectorizer import get_vectors
 from matcher import find_top3_matches
 from output_writer import write_output
 
-import pandas as pd
-from preprocess import normalize_all_names
-from vectorizer import get_vectors
-from matcher import find_top3_matches
-from output_writer import write_output
-from tqdm import tqdm
-
 def main():
     # ファイルパス設定
-    facility_a_path = r"C:\Sumichika\WPC3_TF-IDF\data\A_comparison.csv"
-    base_path = r"C:\Sumichika\WPC3_TF-IDF\data\B_base.csv"
+    facility_a_path = r"C:\Sumichika\data\A_comparison.csv"
+    base_path = r"C:\Sumichika\data\B_base.csv"
 
     # データ読み込み
     df_a = pd.read_csv(facility_a_path)
@@ -30,7 +23,7 @@ def main():
     base_codes = df_base["food_code"].tolist()
     base_names_raw = df_base["food_name"].tolist()
 
-    # TF-IDF ベクトル取得（query と base を同時に渡す）
+    # TF-IDF ベクトル取得
     query_embeddings, base_embeddings = get_vectors(query_names, base_names)
 
     # 1件ずつ類似マッチ処理
